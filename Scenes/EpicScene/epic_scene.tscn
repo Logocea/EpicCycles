@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0qgkw8j8dvfw"]
+[gd_scene load_steps=5 format=3 uid="uid://c0qgkw8j8dvfw"]
 
 [ext_resource type="Script" uid="uid://d1mad4jr0wxwm" path="res://Scenes/EpicScene/epic_scene.gd" id="1_dn7i6"]
 [ext_resource type="Resource" uid="uid://d1g6bcgcvi7u8" path="res://Resources/SimStatus/sim_status.tres" id="2_dbyvj"]
 [ext_resource type="PackedScene" uid="uid://dp6a1l6ptshl5" path="res://Scenes/Epicycle/epicycle.tscn" id="3_vwqmd"]
+[ext_resource type="Script" uid="uid://3ue2vvqt5s6v" path="res://Scenes/EpicScene/UI/context_menu.gd" id="4_5lf20"]
 
 [node name="EpicScene" type="Node2D"]
 script = ExtResource("1_dn7i6")
@@ -37,4 +38,26 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Toggle Pause"
 
+[node name="ContextMenu" type="VBoxContainer" parent="CanvasLayer/EpicSceneUI"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_5lf20")
+
+[node name="AddEpicycleButton" type="Button" parent="CanvasLayer/EpicSceneUI/ContextMenu"]
+layout_mode = 2
+text = "Add Epicycle"
+
+[node name="RemoveEpicycleButtom" type="Button" parent="CanvasLayer/EpicSceneUI/ContextMenu"]
+layout_mode = 2
+text = "Remove Epicycle"
+
+[node name="CloseContextMenuButton" type="Button" parent="CanvasLayer/EpicSceneUI/ContextMenu"]
+layout_mode = 2
+text = "Close"
+
 [connection signal="pressed" from="CanvasLayer/EpicSceneUI/TogglePauseButton" to="." method="_on_toggle_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EpicSceneUI/TogglePauseButton" to="CanvasLayer/EpicSceneUI/ContextMenu" method="_on_toggle_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EpicSceneUI/ContextMenu/CloseContextMenuButton" to="CanvasLayer/EpicSceneUI/ContextMenu" method="_on_close_context_menu_button_pressed"]
