@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SimStatus" load_steps=2 format=3 uid="uid://d1g6bcgcvi7u8"]
+
+[ext_resource type="Script" uid="uid://bph5r7hnid3u2" path="res://Resources/SimStatus/sim_status.gd" id="1_o0gnc"]
+
+[resource]
+script = ExtResource("1_o0gnc")
+sim_running = true
+metadata/_custom_type_script = "uid://bph5r7hnid3u2"
