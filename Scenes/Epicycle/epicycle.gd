@@ -8,6 +8,8 @@ extends Node2D
 @export var canonical_radius: Vector2
 @export var rotational_period: float
 
+@export var draws: bool = false
+
 @onready var time_passed: float = 0
 @onready var current_angle: float = canonical_radius.angle()
 @onready var current_radius: Vector2 = canonical_radius
@@ -61,6 +63,14 @@ func _physics_process(delta: float) -> void:
 		update_collision_shape()
 		if prior_sim_running == false:
 			$AnimationPlayer.play("RESET")
+			
+		var drawing_line: Line2D = $DrawingLine
+		if draws:
+			drawing_line.global_position = Vector2()
+			drawing_line.add_point(global_position + current_radius)
+			drawing_line.show()
+		else:
+			drawing_line.hide()
 	
 	prior_sim_running = sim_status.sim_running
 	

@@ -54,6 +54,14 @@ epicycles_path = NodePath("../../../Node2D/Epicycles")
 layout_mode = 2
 text = "Epicycle 0"
 
+[node name="NewEpicycleX" type="LineEdit" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+placeholder_text = "Initial X"
+
+[node name="NewEpicycleY" type="LineEdit" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+placeholder_text = "Initial Y"
+
 [node name="NewEpicyclePeriod" type="LineEdit" parent="CanvasLayer/Panel/EpicycleContextMenu"]
 layout_mode = 2
 placeholder_text = "Period"
@@ -76,3 +84,4 @@ zoom_scalar = 0.5
 [connection signal="epicycle_selected" from="." to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_epic_scene_epicycle_selected"]
 [connection signal="pressed" from="CanvasLayer/Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/EpicycleContextMenu/AddEpicycleButton" to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_add_epicycle_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/Panel/EpicycleContextMenu/DrawCheckButton" to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_draw_check_button_toggled"]

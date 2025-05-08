@@ -27,10 +27,13 @@ func _on_add_epicycle_button_pressed() -> void:
 	var epicycle_node: Node2D = epicycle_scene.instantiate()
 	
 	epicycle_node.parent_epicycle = selected_epicycle.get_path()
-	epicycle_node.canonical_radius = Vector2(50, 0)
+	epicycle_node.canonical_radius = Vector2(float($NewEpicycleX.text), float($NewEpicycleY.text))
 	epicycle_node.rotational_period = float($NewEpicyclePeriod.text)
 	
 	epicycles.add_child(epicycle_node)
 	
 func _on_epic_scene_epicycle_deselected() -> void:
 	hide()
+
+func _on_draw_check_button_toggled(toggled_on: bool) -> void:
+	selected_epicycle.draws = toggled_on
