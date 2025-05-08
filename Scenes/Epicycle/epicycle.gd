@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var root_node: Node = get_node("../../..")
+
 @export var sim_status: Resource
 
 @export var parent_epicycle: NodePath
@@ -50,14 +52,26 @@ func update_collision_shape() -> void:
 	shape_node.position = current_radius/2.0
 	shape_node.shape = shape
 
+@onready var prior_sim_running: bool = sim_status.sim_running
+
 func _physics_process(delta: float) -> void:
 	if sim_status.sim_running:
 		apply_simulation_logic(delta)
 		update_visual_line()
 		update_collision_shape()
+		if prior_sim_running == false:
+			$AnimationPlayer.play("RESET")
+	
+	prior_sim_running = sim_status.sim_running
 	
 func _on_area_2d_mouse_entered() -> void:
-	$AnimationPlayer.play("line_hovered")
+	if sim_status.sim_running:
+		$AnimationPlayer.play("line_hovered")
 
 func _on_area_2d_mouse_exited() -> void:
-	$AnimationPlayer.play("RESET")
+	if sim_status.sim_running:
+		$AnimationPlayer.play("RESET")
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		root_node.show_panel()

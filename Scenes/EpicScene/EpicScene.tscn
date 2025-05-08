@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyeein5hbipip"]
+
+[ext_resource type="PackedScene" uid="uid://dp6a1l6ptshl5" path="res://Scenes/Epicycle/epicycle.tscn" id="1_7a0lf"]
+[ext_resource type="Script" uid="uid://de31ak7nlshi8" path="res://Scenes/EpicScene/epic_scene.gd" id="1_aa1bo"]
+[ext_resource type="Script" uid="uid://dbohr4rjiu3su" path="res://Scenes/EpicScene/scene_controller.gd" id="2_6acju"]
+[ext_resource type="Resource" uid="uid://d1g6bcgcvi7u8" path="res://Resources/SimStatus/sim_status.tres" id="2_784h2"]
+
+[node name="EpicScene" type="Node"]
+script = ExtResource("1_aa1bo")
+sim_status = ExtResource("2_784h2")
+panel_path = NodePath("CanvasLayer/Panel")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Epicycles" type="Node2D" parent="Node2D"]
+
+[node name="Epicycle" parent="Node2D/Epicycles" instance=ExtResource("1_7a0lf")]
+canonical_radius = Vector2(0, 100)
+rotational_period = 5.0
+
+[node name="Epicycle2" parent="Node2D/Epicycles" instance=ExtResource("1_7a0lf")]
+parent_epicycle = NodePath("../Epicycle")
+canonical_radius = Vector2(0, 50)
+rotational_period = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.35
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Resume"
+
+[node name="SceneController" type="Node" parent="."]
+script = ExtResource("2_6acju")
+camera_path = NodePath("../Node2D/Camera2D")
+pan_scalar = 10.0
+zoom_scalar = 0.5
+
+[connection signal="pressed" from="CanvasLayer/Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
