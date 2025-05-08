@@ -9,8 +9,6 @@
 script = ExtResource("1_dn7i6")
 sim_status = ExtResource("2_dbyvj")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Epicycles" type="Node2D" parent="."]
 
 [node name="Epicycle" parent="Epicycles" instance=ExtResource("3_vwqmd")]
@@ -22,8 +20,9 @@ parent_epicycle = NodePath("../Epicycle")
 canonical_radius = Vector2(50, 0)
 rotational_period = 2.5
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="EpicSceneUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -32,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="TogglePauseButton" type="Button" parent="CanvasLayer/EpicSceneUI"]
 layout_mode = 0
