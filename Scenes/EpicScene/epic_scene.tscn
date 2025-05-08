@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0qgkw8j8dvfw"]
 
-[ext_resource type="Script" uid="uid://d1mad4jr0wxwm" path="res://Scenes/EpicScene/epic_scene.gd" id="1_dn7i6"]
+[ext_resource type="Script" uid="uid://kubybxp2rkq6" path="res://Scenes/EpicScene/epic_scene.gd" id="1_dn7i6"]
 [ext_resource type="Resource" uid="uid://d1g6bcgcvi7u8" path="res://Resources/SimStatus/sim_status.tres" id="2_dbyvj"]
 [ext_resource type="PackedScene" uid="uid://dp6a1l6ptshl5" path="res://Scenes/Epicycle/epicycle.tscn" id="3_vwqmd"]
-[ext_resource type="Script" uid="uid://3ue2vvqt5s6v" path="res://Scenes/EpicScene/UI/context_menu.gd" id="4_5lf20"]
+[ext_resource type="Script" uid="uid://bdwj5anelitk0" path="res://Scenes/EpicScene/UI/context_menu.gd" id="4_5lf20"]
 
 [node name="EpicScene" type="Node2D"]
 script = ExtResource("1_dn7i6")
@@ -23,6 +23,7 @@ canonical_radius = Vector2(50, 0)
 rotational_period = 2.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="EpicSceneUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
