@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyeein5hbipip"]
+[gd_scene load_steps=6 format=3 uid="uid://dyeein5hbipip"]
 
 [ext_resource type="PackedScene" uid="uid://dp6a1l6ptshl5" path="res://Scenes/Epicycle/epicycle.tscn" id="1_7a0lf"]
 [ext_resource type="Script" uid="uid://de31ak7nlshi8" path="res://Scenes/EpicScene/epic_scene.gd" id="1_aa1bo"]
 [ext_resource type="Script" uid="uid://dbohr4rjiu3su" path="res://Scenes/EpicScene/scene_controller.gd" id="2_6acju"]
 [ext_resource type="Resource" uid="uid://d1g6bcgcvi7u8" path="res://Resources/SimStatus/sim_status.tres" id="2_784h2"]
+[ext_resource type="Script" uid="uid://djr4fjfvsvr0o" path="res://Scenes/EpicScene/epicycle_context_menu.gd" id="4_vkr6y"]
 
 [node name="EpicScene" type="Node"]
 script = ExtResource("1_aa1bo")
@@ -42,10 +43,36 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Resume"
 
+[node name="EpicycleContextMenu" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 105.0
+offset_bottom = 105.0
+script = ExtResource("4_vkr6y")
+epicycles_path = NodePath("../../../Node2D/Epicycles")
+
+[node name="Name" type="Label" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+text = "Epicycle 0"
+
+[node name="NewEpicyclePeriod" type="LineEdit" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+placeholder_text = "Period"
+
+[node name="AddEpicycleButton" type="Button" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+text = "Add Epicycle"
+
+[node name="DrawCheckButton" type="CheckButton" parent="CanvasLayer/Panel/EpicycleContextMenu"]
+layout_mode = 2
+text = "Draws"
+
 [node name="SceneController" type="Node" parent="."]
 script = ExtResource("2_6acju")
 camera_path = NodePath("../Node2D/Camera2D")
 pan_scalar = 10.0
 zoom_scalar = 0.5
 
+[connection signal="epicycle_deselected" from="." to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_epic_scene_epicycle_deselected"]
+[connection signal="epicycle_selected" from="." to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_epic_scene_epicycle_selected"]
 [connection signal="pressed" from="CanvasLayer/Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/EpicycleContextMenu/AddEpicycleButton" to="CanvasLayer/Panel/EpicycleContextMenu" method="_on_add_epicycle_button_pressed"]

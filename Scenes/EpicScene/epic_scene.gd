@@ -1,5 +1,8 @@
 extends Node
 
+signal epicycle_selected(which_node: Node2D)
+signal epicycle_deselected
+
 @export var sim_status: Resource
 
 @export var panel_path: NodePath
@@ -15,6 +18,7 @@ func hide_panel() -> void:
 	sim_status.sim_running = true
 	panel.hide()
 	selected_epicycle = null
+	epicycle_deselected.emit()
 	
 func _ready() -> void:
 	hide_panel()

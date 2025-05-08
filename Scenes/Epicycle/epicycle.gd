@@ -76,3 +76,4 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if event is InputEventMouseButton and !sim_status.sim_running:
 		root_node.show_panel()
 		root_node.selected_epicycle = self
+		root_node.epicycle_selected.emit(self)
